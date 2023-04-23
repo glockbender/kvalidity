@@ -1,5 +1,6 @@
 import com.benasher44.uuid.Uuid
 import com.benasher44.uuid.uuid4
+import com.prvz.kvalidity.Validated
 import com.prvz.kvalidity.constraint.DefaultConstraintViolation
 import com.prvz.kvalidity.constraint.False
 import com.prvz.kvalidity.constraint.Greater
@@ -29,7 +30,7 @@ class ValidatorTest : FunSpec() {
     init {
         test("object with values validated by validateVal should have exact violations") {
             val obj = newSomeObject()
-            val validated =
+            val validated: Validated<SomeObj> =
                 validate(obj) {
                     this.validateVal(obj.a, "a").isFalse()
                     this.validateVal(obj.b, "b").isNotNull()
