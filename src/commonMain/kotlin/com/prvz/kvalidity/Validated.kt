@@ -1,33 +1,29 @@
 package com.prvz.kvalidity
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
 import com.prvz.kvalidity.constraint.ConstraintViolationException
 
-sealed interface Validated<T> {
+typealias ResultMonad<V, E> = com.github.michaelbull.result.Result<V, E>
 
-    fun isValid(): Boolean
+sealed class Validated<V>(val value: V, val violation: ConstraintViolationException?) {
+
+    fun isValid(): Boolean = violation == null
 
     fun isNotValid(): Boolean = !isValid()
 
-    fun getViolationOrNull(): ConstraintViolationException?
+    fun throwIfIsNotValid(): V = if (isNotValid()) throw violation!! else value
 
-    fun throwIfIsNotValid(): T
+    fun toResult(): Result<V> =
+        if (isValid()) Result.success(value) else Result.failure(violation!!)
 
-    fun toResult(): Result<T>
+    class Impl<V> internal constructor(value: V, violation: ConstraintViolationException?) :
+        Validated<V>(value = value, violation = violation)
+
+    class MappedImpl<FROM, TO>
+    internal constructor(val fromValue: FROM, value: TO, violation: ConstraintViolationException?) :
+        Validated<TO>(value = value, violation = violation) {}
 }
 
-class ValidatedImpl<T>
-private constructor(private val value: T, private val violation: ConstraintViolationException?) :
-    Validated<T> {
-
-    override fun isValid(): Boolean = violation == null
-
-    override fun getViolationOrNull(): ConstraintViolationException? = violation
-
-    override fun throwIfIsNotValid(): T = if (isNotValid()) throw violation!! else value
-
-    override fun toResult(): Result<T> {
-        TODO("Not yet implemented")
-    }
-}
-
-class ValidatedMapped<FROM, TO> : Validated<TO> {}
+fun <T> Validated<T>.toResultMonad(): ResultMonad<T, ConstraintViolationException> =
+    if (isValid()) Ok(value) else Err(violation!!)

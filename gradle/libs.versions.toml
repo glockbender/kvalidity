@@ -1,11 +1,24 @@
 [versions]
 kotlin = "1.8.20"
+kotlinCoroutines = "1.7.0-RC"
 detekt = "1.22.0"
 kotlinResult = "1.1.17"
+# https://github.com/icerockdev/moko-resources
+mokoResourcesVersion = "0.21.2"
+kotestVersion = "5.6.1"
+kmmUuidVersion = "0.7.0"
 
 [libraries]
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 kotlinResult = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "kotlinResult"}
+mokoResources = { module = "dev.icerock.moko:resources", version.ref = "mokoResourcesVersion" }
+kotlinCoroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines"}
+# Kotest
+kotestAssertionsCore = { module = "io.kotest:kotest-assertions-core", version.ref = "kotestVersion" }
+kotestFrameworkEngine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotestVersion" }
+kotestFrameworkDatatest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotestVersion" }
+kotestRunnerJunit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotestVersion" }
+kmmUuid = { module = "com.benasher44:uuid", version.ref = "kmmUuidVersion" }
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -14,4 +27,6 @@ ktfmtGradle = { id = "com.ncorti.ktfmt.gradle", version = "0.12.0" }
 binaryCompatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.1" }
 versions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
 versionCatalogUpdate = { id = "nl.littlerobots.version-catalog-update", version = "0.8.0" }
+mokoResourcesPlugin = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "mokoResourcesVersion"}
+kotestMultiplatform = { id = "io.kotest.multiplatform", version.ref = "kotestVersion" }
 

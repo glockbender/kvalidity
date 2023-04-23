@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="kvalidity.bundled.Blank">Tiene que estar vacÃ­o</string>
+    <string name="kvalidity.bundled.NotBlank">No puede estar vacÃ­o</string>
+    <string name="kvalidity.bundled.True">Tiene que ser verdadero</string>
+    <string name="kvalidity.bundled.False">Tiene que ser falso</string>
+    <!--  Number constraints  -->
+    <string name="kvalidity.bundled.IntegerDigits">La cantidad de dÃ­gitos enteros tiene que estar entre {min} y {max}</string>
+    <string name="kvalidity.bundled.IntegerDigits.min">La cantidad de dÃ­gitos enteros tiene que ser mayor o igual que {min}</string>
+    <string name="kvalidity.bundled.IntegerDigits.max">La cantidad de dÃ­gitos enteros tiene que ser menor o igual que {max}</string>
+    <string name="kvalidity.bundled.DecimalDigits">La cantidad de dÃ­gitos decimales tiene que estar entre {min} y {max}</string>
+    <string name="kvalidity.bundled.DecimalDigits.min">La cantidad de dÃ­gitos decimales tiene que ser mayor o igual que {min}</string>
+    <string name="kvalidity.bundled.DecimalDigits.max">La cantidad de dÃ­gitos decimales tiene que ser menor o igual que {max}</string>
+    <!--  Comparable constraints  -->
+    <string name="kvalidity.bundled.Less">Tiene que ser menor que %s</string>
+    <string name="kvalidity.bundled.LessOrEqual">Tiene que ser menor o igual que %s</string>
+    <string name="kvalidity.bundled.Greater">Tiene que ser mayor que %s</string>
+    <string name="kvalidity.bundled.GreaterOrEqual">Tiene que ser mayor o igual que %s</string>
+    <string name="kvalidity.bundled.Between">Tiene que estar entre %s y %s</string>
+    <string name="kvalidity.bundled.NotBetween">No puede estar entre %s y %s</string>
+</resources>

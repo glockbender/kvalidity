@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="kvalidity.bundled.Blank">Must be blank</string>
+    <string name="kvalidity.bundled.NotBlank">Must not be blank</string>
+    <string name="kvalidity.bundled.True">Must be true</string>
+    <string name="kvalidity.bundled.False">Must be false</string>
+    <!--  Number constraints  -->
+    <string name="kvalidity.bundled.IntegerDigits">Integer digits must be between %s and %s</string>
+    <string name="kvalidity.bundled.IntegerDigits.min">Integer digits must be greater than or equal to %s</string>
+    <string name="kvalidity.bundled.IntegerDigits.max">Integer digits must be less than or equal to %s</string>
+    <string name="kvalidity.bundled.DecimalDigits">Decimal digits must be between %s and %s</string>
+    <string name="kvalidity.bundled.DecimalDigits.min">Decimal digits must be greater than or equal to %s</string>
+    <string name="kvalidity.bundled.DecimalDigits.max">Decimal digits must be less than or equal to %s</string>
+    <!--  Comparable constraints  -->
+    <string name="kvalidity.bundled.Less">Must be less than %s</string>
+    <string name="kvalidity.bundled.LessOrEqual">Must be less than or equal to %s</string>
+    <string name="kvalidity.bundled.Greater">Must be greater than %s</string>
+    <string name="kvalidity.bundled.GreaterOrEqual">Must be greater than or equal to %s</string>
+    <string name="kvalidity.bundled.Between">Must be between %s and %s</string>
+    <string name="kvalidity.bundled.NotBetween">Must not be between %s and %s</string>
+</resources>

@@ -1,8 +1,10 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform).apply(true)
     alias(libs.plugins.detekt).apply(true)
-    alias(libs.plugins.ktfmtGradle).apply(true)
-    alias(libs.plugins.binaryCompatibility).apply(true)
+//    alias(libs.plugins.ktfmtGradle).apply(true)
+//    alias(libs.plugins.binaryCompatibility).apply(true)
+    alias(libs.plugins.mokoResourcesPlugin).apply(true)
+    alias(libs.plugins.kotestMultiplatform).apply(true)
 }
 
 group = "com.prvz"
@@ -21,8 +23,12 @@ detekt {
     config = files("$rootDir/config/detekt.yaml")
 }
 
-ktfmt { dropboxStyle() }
+//ktfmt { kotlinLangStyle() }
 
+multiplatformResources {
+    multiplatformResourcesPackage = "com.prvz.kvalidity"
+//    multiplatformResourcesClassName = "bundled"
+}
 
 kotlin {
     jvm {
@@ -33,40 +39,66 @@ kotlin {
         }
     }
     js(IR) {
-        browser {
-            commonWebpackConfig {
-                cssSupport {
-                    enabled.set(true)
-                }
+        // Chrome should be installed
+        browser()
+//        browser {
+//            // temp disabling tests for js
+//            testTask {
+//                enabled = false
+//            }
+//            commonWebpackConfig {
+//                cssSupport {
+//                    enabled.set(true)
+//                }
+//            }
+//        }
+    }
+    ios()
+    iosSimulatorArm64()
+
+    targets.all {
+        compilations.all {
+            kotlinOptions {
+                verbose = true
             }
         }
-    }
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        hostOs == "Mac OS X" -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
     
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(libs.mokoResources)
+                implementation(kotlin("stdlib"))
+                implementation(libs.kotlinCoroutines)
                 implementation(libs.kotlinResult)
+                implementation(libs.kmmUuid)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotestAssertionsCore)
+                implementation(libs.kotestFrameworkEngine)
+                implementation(libs.kotestFrameworkDatatest)
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
             }
         }
         val jvmMain by getting
-        val jvmTest by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation(libs.kotestRunnerJunit5)
+            }
+        }
         val jsMain by getting
         val jsTest by getting
-        val nativeMain by getting
-        val nativeTest by getting
+
+        val iosMain by getting
+        val iosSimulatorArm64Main by getting
+        iosSimulatorArm64Main.dependsOn(iosMain)
+
+        val iosTest by getting
+        val iosSimulatorArm64Test by getting
+        iosSimulatorArm64Test.dependsOn(iosTest)
     }
 }
