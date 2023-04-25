@@ -31,6 +31,7 @@ multiplatformResources {
 }
 
 kotlin {
+    explicitApi()
     jvm {
         jvmToolchain(11)
         withJava()

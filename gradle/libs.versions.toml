@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.8.20"
+kotlin = "1.8.21"
 kotlinCoroutines = "1.7.0-RC"
 detekt = "1.22.0"
 kotlinResult = "1.1.17"
