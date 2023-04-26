@@ -1,6 +1,4 @@
 /*
- * Copyright 2018-2020 https://www.valiktor.org
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,25 +23,25 @@ import com.prvz.kvalidity.constraint.LessOrEqual
 import com.prvz.kvalidity.constraint.NotBetween
 
 /** Validates if the [Comparable] property is less than another value */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isLessThan(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isLessThan(
     value: V,
     constraintFunc: (V) -> Constraint = { Less(value) }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || it < value }
 
 /** Validates if the [Comparable] property is less than or equal to another value */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isLessThanOrEqualTo(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isLessThanOrEqualTo(
     value: V,
     constraintFunc: (V) -> Constraint = { LessOrEqual(value) }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || it <= value }
 
 /** Validates if the [Comparable] property is greater than another value */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isGreaterThan(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isGreaterThan(
     value: V,
     constraintFunc: (V?) -> Constraint = { Greater(value) }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || it > value }
 
 /** Validates if the [Comparable] property is greater than or equal to another value */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isGreaterThanOrEqualTo(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isGreaterThanOrEqualTo(
     value: V,
     constraintFunc: (V?) -> Constraint = { Greater(value) }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || it >= value }
@@ -54,7 +52,7 @@ fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isGreaterThanOrEqualTo(
  * @param start (inclusively) specifies value that should start
  * @param end (inclusively) specifies value that should end
  */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isBetween(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isBetween(
     start: V & Any,
     end: V & Any,
     constraintFunc: (V?) -> Constraint = { Between(start, end) }
@@ -67,7 +65,7 @@ fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isBetween(
  * @param start (inclusively) specifies value that shouldn't start
  * @param end (inclusively) specifies value that shouldn't end
  */
-fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isNotBetween(
+public fun <T, V : Comparable<V>?> Validator<T>.Pipeline<V>.isNotBetween(
     start: V & Any,
     end: V & Any,
     constraintFunc: (V?) -> Constraint = { NotBetween(start, end) }

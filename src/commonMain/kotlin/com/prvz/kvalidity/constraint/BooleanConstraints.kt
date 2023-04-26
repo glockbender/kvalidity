@@ -1,6 +1,4 @@
 /*
- * Copyright 2018-2020 https://www.valiktor.org
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,13 +17,13 @@ package com.prvz.kvalidity.constraint
 import com.prvz.kvalidity.MR
 
 /** Represents a constraint that validate if the value is [true] */
-object True : Constraint {
+public object True : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(stringResource = MR.strings.kvalidity_bundled_True)
 }
 
 /** Represents a constraint that validate if the value is [false] */
-object False : Constraint {
+public object False : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(stringResource = MR.strings.kvalidity_bundled_False)

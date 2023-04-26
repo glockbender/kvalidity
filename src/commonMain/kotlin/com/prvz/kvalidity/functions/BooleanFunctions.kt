@@ -1,6 +1,4 @@
 /*
- * Copyright 2018-2020 https://www.valiktor.org
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,11 +20,11 @@ import com.prvz.kvalidity.constraint.False
 import com.prvz.kvalidity.constraint.True
 
 /** Validates if the [Boolean] property is true */
-fun <T, V : Boolean?> Validator<T>.Pipeline<V>.isTrue(
+public fun <T, V : Boolean?> Validator<T>.Pipeline<V>.isTrue(
     constraintFunc: (V?) -> Constraint = { True }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || it }
 
 /** Validates if the [Boolean] property is false */
-fun <T, V : Boolean?> Validator<T>.Pipeline<V>.isFalse(
+public fun <T, V : Boolean?> Validator<T>.Pipeline<V>.isFalse(
     constraintFunc: (V?) -> Constraint = { False }
 ): Validator<T>.Pipeline<V> = this.validate(constraintFunc) { it == null || !it }

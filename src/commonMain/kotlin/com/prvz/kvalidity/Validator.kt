@@ -5,14 +5,14 @@ import com.prvz.kvalidity.constraint.ConstraintViolation
 import com.prvz.kvalidity.constraint.ConstraintViolationException
 import com.prvz.kvalidity.constraint.DefaultConstraintViolation
 
-class Validator<T> {
+public class Validator<T> {
 
     internal val violations: MutableList<ConstraintViolation> = mutableListOf()
 
-    fun <V> validateVal(value: V, propName: String): PipelineValue<V> =
+    public fun <V> validateVal(value: V, propName: String): PipelineValue<V> =
         PipelineValue(value = value, propName = propName)
 
-    abstract inner class Pipeline<V> {
+    public abstract inner class Pipeline<V> {
 
         internal abstract val value: V?
         internal abstract val propName: String?
@@ -23,22 +23,22 @@ class Validator<T> {
                     property = propName, value = value, constraint = constraint)
         }
 
-        abstract fun validate(
+        public abstract fun validate(
             constraintFunc: (V) -> Constraint,
             isValid: (V) -> Boolean
         ): Pipeline<V>
 
-        abstract fun <R> validateAndMap(
+        public abstract fun <R> validateAndMap(
             constraintFunc: (V) -> Constraint,
             isValid: (V) -> Boolean,
             mapperFunc: (V) -> R
         ): PipelineMutated<R>
 
-        fun validate(constraint: Constraint, isValid: (V) -> Boolean): Pipeline<V> =
+        public fun validate(constraint: Constraint, isValid: (V) -> Boolean): Pipeline<V> =
             validate({ constraint }, isValid)
     }
 
-    inner class PipelineValue<V>(override val value: V, override val propName: String) :
+    public inner class PipelineValue<V>(override val value: V, override val propName: String) :
         Pipeline<V>() {
         override fun validate(
             constraintFunc: (V) -> Constraint,
@@ -78,10 +78,10 @@ class Validator<T> {
     //    }
 
     /** Experimental because unsafe */
-    inner class PipelineMutated<V>(
+    public inner class PipelineMutated<V>(
         override val value: V?,
         override val propName: String?,
-        val failed: Boolean
+        public val failed: Boolean
     ) : Pipeline<V>() {
 
         override fun validate(
@@ -121,7 +121,7 @@ class Validator<T> {
 //    return pipeline
 // }
 
-fun <T> validate(value: T, validatorFunc: Validator<T>.(T) -> Unit): Validated<T> {
+public fun <T> validate(value: T, validatorFunc: Validator<T>.(T) -> Unit): Validated<T> {
     val validator = Validator<T>()
     validatorFunc.invoke(validator, value)
     return if (validator.violations.isEmpty()) {

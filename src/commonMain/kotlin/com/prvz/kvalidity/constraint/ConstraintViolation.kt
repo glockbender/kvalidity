@@ -1,17 +1,18 @@
 package com.prvz.kvalidity.constraint
 
-interface ConstraintViolation {
-    val property: String?
-    val value: Any?
-    val constraint: Constraint
+public interface ConstraintViolation {
+    public val property: String?
+    public val value: Any?
+    public val constraint: Constraint
 }
 
-data class DefaultConstraintViolation(
+public data class DefaultConstraintViolation(
     override val property: String?,
     override val value: Any? = null,
     override val constraint: Constraint
 ) : ConstraintViolation
 
 /** Represents an exception that contains all the violated constraints of an object */
-class ConstraintViolationException(val constraintViolations: Collection<ConstraintViolation>) :
-    RuntimeException()
+public class ConstraintViolationException(
+    public val constraintViolations: Collection<ConstraintViolation>
+) : RuntimeException()

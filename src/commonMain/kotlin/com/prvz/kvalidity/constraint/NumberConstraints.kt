@@ -1,6 +1,4 @@
 /*
- * Copyright 2018-2020 https://www.valiktor.org
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +21,8 @@ import dev.icerock.moko.resources.StringResource
  * Represents a constraint that validates if the integer value (before decimal separator) is within
  * the limits (min and max)
  */
-data class IntegerDigits(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VALUE) : Constraint {
+public data class IntegerDigits(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VALUE) :
+    Constraint {
 
     private fun getData(): Pair<StringResource, Array<out Any>> =
         when {
@@ -49,7 +48,8 @@ data class IntegerDigits(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VA
  * Represents a constraint that validates if the decimal value (after decimal separator) is within
  * the limits (min and max)
  */
-data class DecimalDigits(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VALUE) : Constraint {
+public data class DecimalDigits(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VALUE) :
+    Constraint {
 
     private fun getData(): Pair<StringResource, Array<out Any>> =
         when {

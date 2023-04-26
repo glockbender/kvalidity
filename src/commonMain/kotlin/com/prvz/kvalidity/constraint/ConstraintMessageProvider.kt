@@ -3,11 +3,11 @@ package com.prvz.kvalidity.constraint
 import com.prvz.kvalidity.MokoStringResourceTranslator
 import dev.icerock.moko.resources.StringResource
 
-interface ConstraintMessageProvider {
-    suspend fun getMessage(locale: String): String?
+public interface ConstraintMessageProvider {
+    public suspend fun getMessage(locale: String): String?
 }
 
-class MokoStaticConstraintMessageProvider(
+public class MokoStaticConstraintMessageProvider(
     private val stringResource: StringResource,
     private val params: Array<out Any>? = null,
     private val stringResourceTranslator: MokoStringResourceTranslator =
