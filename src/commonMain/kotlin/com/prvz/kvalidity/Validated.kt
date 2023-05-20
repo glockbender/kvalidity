@@ -31,8 +31,9 @@ public sealed class Validated<V>(
         if (isValid()) value else throw generateException()
     }
 
-    public suspend fun toResult(): Result<V> =
+    public suspend fun toResult(): Result<V> = coroutineScope {
         if (isValid()) Result.success(value) else Result.failure(generateException())
+    }
 
     public class Impl<V>
     internal constructor(
