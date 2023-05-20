@@ -66,7 +66,8 @@ public object LetterOrDigit : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_LetterOrDigit)
+            stringResource = MR.strings.kvalidity_bundled_LetterOrDigit
+        )
 }
 
 /** Represents a constraint that validates if the value is not letter or digit */
@@ -74,7 +75,8 @@ public object NotLetterOrDigit : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_NotLetterOrDigit)
+            stringResource = MR.strings.kvalidity_bundled_NotLetterOrDigit
+        )
 }
 
 /** Represents a constraint that validates if the value is uppercase */
@@ -102,7 +104,9 @@ public data class Matches(val pattern: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_Matches, pattern)
+            stringResource = MR.strings.kvalidity_bundled_Matches,
+            pattern
+        )
 }
 
 /**
@@ -115,7 +119,9 @@ public data class NotMatch(val pattern: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_NotMatch, pattern)
+            stringResource = MR.strings.kvalidity_bundled_NotMatch,
+            pattern
+        )
 }
 
 /**
@@ -128,7 +134,9 @@ public data class ContainsRegex(val pattern: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_ContainsRegex, pattern)
+            stringResource = MR.strings.kvalidity_bundled_ContainsRegex,
+            pattern
+        )
 }
 
 /**
@@ -141,7 +149,9 @@ public data class NotContainRegex(val pattern: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_NotContainRegex, pattern)
+            stringResource = MR.strings.kvalidity_bundled_NotContainRegex,
+            pattern
+        )
 }
 
 /**
@@ -153,7 +163,9 @@ public data class StartsWith(val prefix: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_StartsWith, prefix)
+            stringResource = MR.strings.kvalidity_bundled_StartsWith,
+            prefix
+        )
 }
 
 /**
@@ -165,7 +177,9 @@ public data class NotStartWith(val prefix: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_NotStartWith, prefix)
+            stringResource = MR.strings.kvalidity_bundled_NotStartWith,
+            prefix
+        )
 }
 
 /**
@@ -177,7 +191,9 @@ public data class EndsWith(val suffix: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_EndsWith, suffix)
+            stringResource = MR.strings.kvalidity_bundled_EndsWith,
+            suffix
+        )
 }
 
 /**
@@ -189,7 +205,9 @@ public data class NotEndWith(val suffix: String) : Constraint {
 
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider.of(
-            stringResource = MR.strings.kvalidity_bundled_NotEndWith, suffix)
+            stringResource = MR.strings.kvalidity_bundled_NotEndWith,
+            suffix
+        )
 }
 
 /** Represents a constraint that validates if the value is a valid e-mail */

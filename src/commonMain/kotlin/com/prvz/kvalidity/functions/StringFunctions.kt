@@ -457,7 +457,9 @@ public fun <V : String?> ObjectValidation<V>.isEmail(): ObjectValidation<V> =
         it == null ||
             it.matches(
                 Regex(
-                    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+                    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+                )
+            )
     }
 
 /** Validates if the [String] property value is a valid website */
@@ -465,5 +467,6 @@ public fun <V : String?> ObjectValidation<V>.isWebsite(): ObjectValidation<V> =
     this.validate({ Website }) {
         it == null ||
             it.matches(
-                Regex("^(https?:\\/\\/)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\\.)+[\\w]{2,}(\\/\\S*)?\$"))
+                Regex("^(https?:\\/\\/)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\\.)+[\\w]{2,}(\\/\\S*)?\$")
+            )
     }

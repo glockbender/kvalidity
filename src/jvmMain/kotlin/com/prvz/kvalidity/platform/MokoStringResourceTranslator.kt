@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2023.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -12,14 +14,18 @@
  *  limitations under the License.
  */
 
-package com.prvz.kvalidity.ext
+package com.prvz.kvalidity.platform
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
-import com.prvz.kvalidity.Validated
-import com.prvz.kvalidity.constraint.model.ConstraintViolation
+import dev.icerock.moko.resources.StringResource
+import java.util.*
 
-public typealias ResultMonad<V, E> = com.github.michaelbull.result.Result<V, E>
-
-public fun <T> Validated<T>.toResultMonad(): ResultMonad<T, Collection<ConstraintViolation>> =
-    if (isValid()) Ok(value) else Err(constraintViolations)
+public actual object MokoStringResourceTranslator {
+    public actual suspend fun localized(
+        res: StringResource,
+        locale: String,
+        vararg args: Any
+    ): String {
+        val jvmLocale = Locale(locale)
+        return res.localized(jvmLocale, args = args)
+    }
+}

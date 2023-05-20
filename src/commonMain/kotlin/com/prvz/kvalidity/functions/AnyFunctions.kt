@@ -14,7 +14,7 @@
 
 package com.prvz.kvalidity.functions
 
-import com.prvz.kvalidity.MutatedObjectValidation
+import com.prvz.kvalidity.MappedObjectValidation
 import com.prvz.kvalidity.ObjectValidation
 import com.prvz.kvalidity.constraint.Equals
 import com.prvz.kvalidity.constraint.In
@@ -37,11 +37,12 @@ public fun <V> ObjectValidation<V>.isNull(): ObjectValidation<V> =
 /** Validates if the property value is not null */
 public fun <V> ObjectValidation<V?>.isNotNull(
     constraintFunc: (V?) -> Constraint = { NotNull }
-): MutatedObjectValidation<V> =
+): MappedObjectValidation<V> =
     this.validateAndMap(
         constraintBuilder = constraintFunc,
         isValid = { it != null },
-        mapperFunc = { it ?: throw IllegalStateException("Unexpected null in mapper func") })
+        mapperFunc = { it ?: throw IllegalStateException("Unexpected null in mapper func") }
+    )
 
 /**
  * Validates if the property value is equal to another value

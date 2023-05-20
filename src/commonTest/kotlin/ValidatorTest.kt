@@ -1,6 +1,20 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import com.benasher44.uuid.Uuid
 import com.benasher44.uuid.uuid4
-import com.prvz.kvalidity.MutatedObjectValidation
+import com.prvz.kvalidity.MappedObjectValidation
 import com.prvz.kvalidity.Validated
 import com.prvz.kvalidity.constraint.False
 import com.prvz.kvalidity.constraint.Greater
@@ -17,7 +31,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.types.shouldBeInstanceOf
 
 class ValidatorTest : FunSpec() {
@@ -43,32 +56,32 @@ class ValidatorTest : FunSpec() {
                     this.validateVal(obj.d.e, "d.e").isGreaterThan(3)
                     // check invalid validation with mapping
                     val nullValidation = this.validateVal(obj.b, "b").isNotNull()
-                    nullValidation.shouldBeInstanceOf<MutatedObjectValidation.Invalid<String>>()
-                    shouldThrow<MutatedObjectValidation.Invalid.AccessToValueException> {
+                    nullValidation.shouldBeInstanceOf<MappedObjectValidation.Invalid<String>>()
+                    shouldThrow<MappedObjectValidation.Invalid.AccessToValueException> {
                         nullValidation.value
                     }
-                    shouldNotThrow<MutatedObjectValidation.Invalid.AccessToValueException> {
+                    shouldNotThrow<MappedObjectValidation.Invalid.AccessToValueException> {
                         nullValidation.isEmpty()
                     }
 
-                    shouldNotThrow<MutatedObjectValidation.Invalid.AccessToValueException> {
+                    shouldNotThrow<MappedObjectValidation.Invalid.AccessToValueException> {
                         nullValidation.validateAndMap(
                             constraintBuilder = { Valid },
                             isValid = { it.isNotEmpty() },
-                            mapperFunc = {})
+                            mapperFunc = {}
+                        )
                     }
                     // check valid validation with mapping
                     val nonNullValidation = this.validateVal(obj.d.f, "d.f").isNotNull()
-                    nonNullValidation.shouldBeInstanceOf<MutatedObjectValidation.Valid<String>>()
+                    nonNullValidation.shouldBeInstanceOf<MappedObjectValidation.Valid<String>>()
                 }
-            validated.violation
-                .shouldNotBeNull()
-                .constraintViolations
+            validated.constraintViolations
                 .shouldHaveSize(3)
                 .shouldContainExactlyInAnyOrder(
                     DefaultConstraintViolation("a", obj.a, False),
                     DefaultConstraintViolation("b", obj.b, NotNull),
-                    DefaultConstraintViolation("d.e", obj.d.e, Greater(3)))
+                    DefaultConstraintViolation("d.e", obj.d.e, Greater(3))
+                )
         }
     }
 }

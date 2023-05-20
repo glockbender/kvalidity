@@ -14,7 +14,7 @@
 
 package com.prvz.kvalidity.constraint.model
 
-import com.prvz.kvalidity.MokoStringResourceTranslator
+import com.prvz.kvalidity.platform.MokoStringResourceTranslator
 import dev.icerock.moko.resources.StringResource
 
 public interface ConstraintMessageProvider {
@@ -25,7 +25,7 @@ public class MokoStaticConstraintMessageProvider(
     private val stringResource: StringResource,
     private val params: Array<out Any>? = null,
     private val stringResourceTranslator: MokoStringResourceTranslator =
-        MokoStringResourceTranslator.INSTANCE
+        MokoStringResourceTranslator
 ) : ConstraintMessageProvider {
 
     public companion object {
@@ -42,7 +42,7 @@ public class MokoStaticConstraintMessageProvider(
                     stringResourceTranslator.localized(res = stringResource, locale = locale)
                 } else {
                     stringResourceTranslator.localized(
-                        res = stringResource, locale = locale, *params)
+                        res = stringResource, locale = locale, params.map { it.toString() })
                 }
             }
             .getOrNull()

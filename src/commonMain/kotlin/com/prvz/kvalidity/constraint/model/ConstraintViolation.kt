@@ -27,6 +27,7 @@ public data class DefaultConstraintViolation(
 ) : ConstraintViolation
 
 /** Represents an exception that contains all the violated constraints of an object */
-public class ConstraintViolationException(
-    public val constraintViolations: Collection<ConstraintViolation>
-) : RuntimeException()
+public class ConstraintViolationException(violationMessages: Collection<String>) :
+    RuntimeException() {
+    override val message: String = violationMessages.joinToString(separator = "; ")
+}

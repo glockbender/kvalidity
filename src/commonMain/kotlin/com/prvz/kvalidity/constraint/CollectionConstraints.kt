@@ -41,7 +41,9 @@ public object NotEmpty : Constraint {
 public data class Contains<T>(val value: T) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_Contains, value.toParamArrayOrNull())
+            stringResource = MR.strings.kvalidity_bundled_Contains,
+            value.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -52,7 +54,9 @@ public data class Contains<T>(val value: T) : Constraint {
 public data class ContainsAll<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_ContainsAll, values.toParamArrayOrNull())
+            stringResource = MR.strings.kvalidity_bundled_ContainsAll,
+            values.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -63,7 +67,9 @@ public data class ContainsAll<T>(val values: Iterable<T>) : Constraint {
 public data class ContainsAny<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_ContainsAny, values.toParamArrayOrNull())
+            stringResource = MR.strings.kvalidity_bundled_ContainsAny,
+            values.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -74,7 +80,9 @@ public data class ContainsAny<T>(val values: Iterable<T>) : Constraint {
 public data class NotContain<T>(val value: T) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
-            stringResource = MR.strings.kvalidity_bundled_NotContain, value.toParamArrayOrNull())
+            stringResource = MR.strings.kvalidity_bundled_NotContain,
+            value.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -86,7 +94,8 @@ public data class NotContainAll<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_NotContainAll,
-            values.toParamArrayOrNull())
+            values.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -98,7 +107,8 @@ public data class NotContainAny<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_NotContainAny,
-            values.toParamArrayOrNull())
+            values.toParamArrayOrNull()
+        )
 }
 
 /**

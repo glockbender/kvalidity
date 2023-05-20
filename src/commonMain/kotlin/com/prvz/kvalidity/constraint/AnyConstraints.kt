@@ -43,7 +43,8 @@ public data class Equals<T>(val value: T) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_Equals,
-            params = value.toParamArrayOrNull())
+            params = value?.toString().toParamArrayOrNull()
+        )
 }
 
 /**
@@ -55,7 +56,8 @@ public data class NotEquals<T>(val value: T) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_NotEquals,
-            params = value.toParamArrayOrNull())
+            params = value?.toString().toParamArrayOrNull()
+        )
 }
 
 /**
@@ -67,7 +69,8 @@ public data class In<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_Equals,
-            params = values.toParamArrayOrNull())
+            params = values.toParamArrayOrNull()
+        )
 }
 
 /**
@@ -79,7 +82,8 @@ public data class NotIn<T>(val values: Iterable<T>) : Constraint {
     override val messageProvider: ConstraintMessageProvider =
         MokoStaticConstraintMessageProvider(
             stringResource = MR.strings.kvalidity_bundled_NotIn,
-            params = values.toParamArrayOrNull())
+            params = values.toParamArrayOrNull()
+        )
 }
 
 /**

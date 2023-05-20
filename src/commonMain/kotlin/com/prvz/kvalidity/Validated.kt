@@ -16,30 +16,38 @@ package com.prvz.kvalidity
 
 import com.prvz.kvalidity.constraint.model.ConstraintViolation
 import com.prvz.kvalidity.constraint.model.ConstraintViolationException
+import kotlinx.coroutines.coroutineScope
 
 public sealed class Validated<V>(
     public val value: V,
-    public val violation: ConstraintViolationException?
+    public val constraintViolations: Collection<ConstraintViolation>
 ) {
 
-    public fun isValid(): Boolean = violation == null
+    public fun isValid(): Boolean = constraintViolations.isEmpty()
 
     public fun isNotValid(): Boolean = !isValid()
 
-    public fun throwIfIsNotValid(): V = if (isValid()) value else throw violation!!
+    public suspend fun throwIfIsNotValid(): V = coroutineScope {
+        if (isValid()) value else throw generateException()
+    }
 
-    public fun violations(): Collection<ConstraintViolation>? = violation?.constraintViolations
+    public suspend fun toResult(): Result<V> =
+        if (isValid()) Result.success(value) else Result.failure(generateException())
 
-    public fun toResult(): Result<V> =
-        if (isValid()) Result.success(value) else Result.failure(violation!!)
+    public class Impl<V>
+    internal constructor(
+        value: V,
+        constraintViolations: Collection<ConstraintViolation> = emptyList()
+    ) : Validated<V>(value = value, constraintViolations = constraintViolations)
 
-    public class Impl<V> internal constructor(value: V, violation: ConstraintViolationException?) :
-        Validated<V>(value = value, violation = violation)
-
-//    public class MappedImpl<FROM, TO>
-//    internal constructor(
-//        public val fromValue: FROM,
-//        value: TO,
-//        violation: ConstraintViolationException?
-//    ) : Validated<TO>(value = value, violation = violation) {}
+    private suspend fun generateException(): ConstraintViolationException {
+        val locale = LocaleDispatcher.getLocale()
+        val violationMessages =
+            constraintViolations.map {
+                val propName = it.property ?: "unknown"
+                val message = it.constraint.messageProvider.getMessage(locale)
+                "$propName: ${message ?: "Constraint violation message unavailable. Obj: $it"}"
+            }
+        return ConstraintViolationException(violationMessages)
+    }
 }

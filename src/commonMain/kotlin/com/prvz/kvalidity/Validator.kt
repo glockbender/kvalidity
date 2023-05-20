@@ -14,11 +14,7 @@
 
 package com.prvz.kvalidity
 
-import com.prvz.kvalidity.constraint.model.Constraint
 import com.prvz.kvalidity.constraint.model.ConstraintViolation
-import com.prvz.kvalidity.constraint.model.ConstraintViolationException
-
-public typealias ConstraintViolationContainer = MutableSet<Constraint>
 
 public class Validator<T> {
 
@@ -30,8 +26,8 @@ public class Validator<T> {
 
 public fun <V> Validator<V>.toValidated(value: V): Validated<V> =
     if (this.violations.isEmpty()) {
-        Validated.Impl(value, null)
-    } else Validated.Impl(value, ConstraintViolationException(this.violations))
+        Validated.Impl(value, emptyList())
+    } else Validated.Impl(value, this.violations)
 
 public inline fun <V> V.validateSelf(
     propName: String? = null,

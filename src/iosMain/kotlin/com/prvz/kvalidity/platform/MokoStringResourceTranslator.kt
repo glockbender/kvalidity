@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2023.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -12,13 +14,13 @@
  *  limitations under the License.
  */
 
-package com.prvz.kvalidity
+package com.prvz.kvalidity.platform
 
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
 
-public actual class MokoStringResourceTranslator private actual constructor() {
+public actual object MokoStringResourceTranslator {
     public actual suspend fun localized(
         res: StringResource,
         locale: String,
@@ -26,11 +28,8 @@ public actual class MokoStringResourceTranslator private actual constructor() {
     ): String {
 
         StringDesc.localeType = StringDesc.LocaleType.Custom(locale)
-
-        return StringDesc.ResourceFormatted(res, args).localized()
-    }
-
-    public actual companion object Holder {
-        public actual val INSTANCE: MokoStringResourceTranslator = MokoStringResourceTranslator()
+        //FIXME crutch for proper args formatting on ios
+        val formatted = args.map { it.toString() }
+        return StringDesc.ResourceFormatted(res, formatted).localized()
     }
 }

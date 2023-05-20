@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2023.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -12,14 +14,18 @@
  *  limitations under the License.
  */
 
-package com.prvz.kvalidity.ext
+package com.prvz.kvalidity
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
-import com.prvz.kvalidity.Validated
-import com.prvz.kvalidity.constraint.model.ConstraintViolation
+import com.prvz.kvalidity.platform.DefaultLocaleSupport
+import kotlin.native.concurrent.ThreadLocal
 
-public typealias ResultMonad<V, E> = com.github.michaelbull.result.Result<V, E>
+@ThreadLocal
+public object LocaleDispatcher {
 
-public fun <T> Validated<T>.toResultMonad(): ResultMonad<T, Collection<ConstraintViolation>> =
-    if (isValid()) Ok(value) else Err(constraintViolations)
+    private var customLocale: String? = null
+
+    public fun setCustomLocale(customLocale: String?) {
+        this.customLocale = customLocale
+    }
+    public fun getLocale(): String = customLocale ?: DefaultLocaleSupport.getSystemLocale()
+}

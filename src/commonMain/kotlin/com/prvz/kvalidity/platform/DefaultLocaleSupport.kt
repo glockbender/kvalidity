@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2023.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -12,14 +14,8 @@
  *  limitations under the License.
  */
 
-package com.prvz.kvalidity
+package com.prvz.kvalidity.platform
 
-import dev.icerock.moko.resources.StringResource
-
-public expect class MokoStringResourceTranslator private constructor() {
-    public suspend fun localized(res: StringResource, locale: String, vararg args: Any): String
-
-    public companion object Holder {
-        public val INSTANCE: MokoStringResourceTranslator
-    }
+internal expect object DefaultLocaleSupport {
+    internal fun getSystemLocale(): String
 }

@@ -23,7 +23,7 @@ kmmUuid = { module = "com.benasher44:uuid", version.ref = "kmmUuidVersion" }
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-ktfmtGradle = { id = "com.ncorti.ktfmt.gradle", version = "0.12.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.18.0" }
 binaryCompatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.1" }
 versions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
 versionCatalogUpdate = { id = "nl.littlerobots.version-catalog-update", version = "0.8.0" }

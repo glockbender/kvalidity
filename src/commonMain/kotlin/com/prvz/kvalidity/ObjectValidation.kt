@@ -16,12 +16,18 @@ package com.prvz.kvalidity
 
 import com.prvz.kvalidity.constraint.model.Constraint
 import com.prvz.kvalidity.constraint.model.DefaultConstraintViolation
+import com.prvz.kvalidity.ext.UnsafeApi
 
+/**
+ * NOTE for devs extending this class:
+ *
+ * access to [value] with caution because i.e. [MappedObjectValidation.Invalid] is not supported
+ * access to this property
+ */
 public sealed class ObjectValidation<V>(
     protected val validator: Validator<*>,
     protected val isStopped: Boolean
 ) {
-
     internal abstract val value: V
     internal abstract val propName: String?
 
@@ -64,28 +70,28 @@ public sealed class ObjectValidation<V>(
         constraintBuilder: (V) -> Constraint,
         isValid: (V) -> Boolean,
         mapperFunc: (V) -> R
-    ): MutatedObjectValidation<R> =
+    ): MappedObjectValidation<R> =
         if (isStopped) {
-            MutatedObjectValidation.Invalid(validator, propName)
+            MappedObjectValidation.Invalid(validator, propName)
         } else if (isValid(value)) {
             val mappedValue = mapperFunc.invoke(value)
-            MutatedObjectValidation.Valid(validator, mappedValue, propName)
+            MappedObjectValidation.Valid(validator, mappedValue, propName)
         } else {
             addNewViolation(value, constraintBuilder.invoke(value))
-            MutatedObjectValidation.Invalid(validator, propName)
+            MappedObjectValidation.Invalid(validator, propName)
         }
 
     public open suspend fun <R> coValidateAndMap(
         constraintBuilder: (V) -> Constraint,
         isValid: suspend (V) -> Boolean,
         mapperFunc: suspend (V) -> R
-    ): MutatedObjectValidation<R> =
+    ): MappedObjectValidation<R> =
         if (isValid(value)) {
             val mappedValue = mapperFunc.invoke(value)
-            MutatedObjectValidation.Valid(validator, mappedValue, propName)
+            MappedObjectValidation.Valid(validator, mappedValue, propName)
         } else {
             addNewViolation(value, constraintBuilder.invoke(value))
-            MutatedObjectValidation.Invalid(validator, propName)
+            MappedObjectValidation.Invalid(validator, propName)
         }
 }
 
@@ -95,24 +101,26 @@ public class ValueObjectValidation<V>(
     override val propName: String?
 ) : ObjectValidation<V>(validator, isStopped = false)
 
-/** Experimental because unsafe */
-public sealed class MutatedObjectValidation<V>(validator: Validator<*>, isStopped: Boolean) :
+@UnsafeApi(
+    "if impl is [Invalid] access to it [value] property is not supported and throws AccessToValueException"
+)
+public sealed class MappedObjectValidation<V>(validator: Validator<*>, isStopped: Boolean) :
     ObjectValidation<V>(validator, isStopped) {
 
     public class Valid<V>(
         validator: Validator<*>,
         override val value: V,
         override val propName: String?
-    ) : MutatedObjectValidation<V>(validator, isStopped = false)
+    ) : MappedObjectValidation<V>(validator, isStopped = false)
 
-    public class Invalid<V>(
-        validator: Validator<*>,
-        override val propName: String?
-    ) : MutatedObjectValidation<V>(validator, isStopped = true) {
+    @UnsafeApi("access to [value] property is not supported and throws AccessToValueException")
+    public class Invalid<V>(validator: Validator<*>, override val propName: String?) :
+        MappedObjectValidation<V>(validator, isStopped = true) {
 
         internal object AccessToValueException :
             IllegalStateException(
-                "unexpected behavior: In InvalidMutatedObjectValidation value mustn't be called")
+                "unexpected behavior: In InvalidMutatedObjectValidation value mustn't be called"
+            )
         override val value: V
             get() = throw AccessToValueException
 
@@ -121,13 +129,13 @@ public sealed class MutatedObjectValidation<V>(validator: Validator<*>, isStoppe
             constraintBuilder: (V) -> Constraint,
             isValid: (V) -> Boolean,
             mapperFunc: (V) -> R
-        ): MutatedObjectValidation<R> = this as Invalid<R>
+        ): MappedObjectValidation<R> = this as Invalid<R>
 
         @Suppress("UNCHECKED_CAST")
         override suspend fun <R> coValidateAndMap(
             constraintBuilder: (V) -> Constraint,
             isValid: suspend (V) -> Boolean,
             mapperFunc: suspend (V) -> R
-        ): MutatedObjectValidation<R> = this as Invalid<R>
+        ): MappedObjectValidation<R> = this as Invalid<R>
     }
 }
