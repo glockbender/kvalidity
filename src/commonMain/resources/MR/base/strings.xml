@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="kvalidity.bundled.Blank">Must be blank</string>
-    <string name="kvalidity.bundled.NotBlank">Must not be blank</string>
+    <!--  Any constraints  -->
+    <string name="kvalidity.bundled.Null">Must be null</string>
+    <string name="kvalidity.bundled.NotNull">Must not be null</string>
+    <string name="kvalidity.bundled.Equals">Must be equal to %s</string>
+    <string name="kvalidity.bundled.NotEquals">Must not be equal to %s</string>
+    <string name="kvalidity.bundled.In">Must be in %s</string>
+    <string name="kvalidity.bundled.NotIn">Must not be in %s</string>
+    <string name="kvalidity.bundled.Valid">Must be valid</string>
+    <!--  Boolean constraints  -->
     <string name="kvalidity.bundled.True">Must be true</string>
     <string name="kvalidity.bundled.False">Must be false</string>
     <!--  Number constraints  -->
@@ -18,4 +25,37 @@
     <string name="kvalidity.bundled.GreaterOrEqual">Must be greater than or equal to %s</string>
     <string name="kvalidity.bundled.Between">Must be between %s and %s</string>
     <string name="kvalidity.bundled.NotBetween">Must not be between %s and %s</string>
+    <!--  collection constraints  -->
+    <string name="kvalidity.bundled.Empty">Must be empty</string>
+    <string name="kvalidity.bundled.NotEmpty">Must not be empty</string>
+    <string name="kvalidity.bundled.Size">Size must be between %s and %s</string>
+    <string name="kvalidity.bundled.Size.min">Size must be greater than or equal to %s</string>
+    <string name="kvalidity.bundled.Size.max">Size must be less than or equal to %s</string>
+    <string name="kvalidity.bundled.Contains">Must contain %s</string>
+    <string name="kvalidity.bundled.ContainsAll">Must contain all %s</string>
+    <string name="kvalidity.bundled.ContainsAny">Must contain any %s</string>
+    <string name="kvalidity.bundled.NotContain">Must not contain %s</string>
+    <string name="kvalidity.bundled.NotContainAll">Must not contain all %s</string>
+    <string name="kvalidity.bundled.NotContainAny">Must not contain any %s</string>
+    <!--  text constraints  -->
+    <string name="kvalidity.bundled.Blank">Must be blank</string>
+    <string name="kvalidity.bundled.NotBlank">Must not be blank</string>
+    <string name="kvalidity.bundled.Letter">Must be letter</string>
+    <string name="kvalidity.bundled.NotLetter">Must not be letter</string>
+    <string name="kvalidity.bundled.Digit">Must be digit</string>
+    <string name="kvalidity.bundled.NotDigit">Must not be digit</string>
+    <string name="kvalidity.bundled.LetterOrDigit">Must be letter or digit</string>
+    <string name="kvalidity.bundled.NotLetterOrDigit">Must not be letter or digit</string>
+    <string name="kvalidity.bundled.UpperCase">Must be upper case</string>
+    <string name="kvalidity.bundled.LowerCase">Must be lower case</string>
+    <string name="kvalidity.bundled.Matches">Must match %s</string>
+    <string name="kvalidity.bundled.NotMatch">Must not match %s</string>
+    <string name="kvalidity.bundled.ContainsRegex">Must contain the pattern %s</string>
+    <string name="kvalidity.bundled.NotContainRegex">Must not contain the pattern %s</string>
+    <string name="kvalidity.bundled.StartsWith">Must start with %s</string>
+    <string name="kvalidity.bundled.NotStartWith">Must not start with %s</string>
+    <string name="kvalidity.bundled.EndsWith">Must end with %s</string>
+    <string name="kvalidity.bundled.NotEndWith">Must not end with %s</string>
+    <string name="kvalidity.bundled.Email">Must be a valid email address</string>
+    <string name="kvalidity.bundled.Website">Must be a valid website</string>
 </resources>

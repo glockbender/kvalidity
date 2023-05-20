@@ -1,6 +1,6 @@
 root = true
 
-[*.{yml, yaml, sql, md}]
+[*.{yml,yaml,sql,md}]
 indent_size = 2
 
 [{*.kt,*.kts}]

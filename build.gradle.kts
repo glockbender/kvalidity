@@ -1,10 +1,15 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform).apply(true)
     alias(libs.plugins.detekt).apply(true)
-//    alias(libs.plugins.ktfmtGradle).apply(true)
+    alias(libs.plugins.ktfmtGradle).apply(true)
 //    alias(libs.plugins.binaryCompatibility).apply(true)
     alias(libs.plugins.mokoResourcesPlugin).apply(true)
     alias(libs.plugins.kotestMultiplatform).apply(true)
+
+    alias(libs.plugins.versions)
+    alias(libs.plugins.versionCatalogUpdate)
 }
 
 group = "com.prvz"
@@ -23,7 +28,20 @@ detekt {
     config = files("$rootDir/config/detekt.yaml")
 }
 
-//ktfmt { kotlinLangStyle() }
+ktfmt { kotlinLangStyle() }
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
+}
+// https://github.com/ben-manes/gradle-versions-plugin
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
+}
 
 multiplatformResources {
     multiplatformResourcesPackage = "com.prvz.kvalidity"

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="kvalidity.bundled.Blank">Tiene que estar vacÃ­o</string>
-    <string name="kvalidity.bundled.NotBlank">No puede estar vacÃ­o</string>
+    <!--  Any constraints  -->
+    <string name="kvalidity.bundled.Null">Tiene que ser nulo</string>
+    <string name="kvalidity.bundled.NotNull">No puede ser nulo</string>
+    <string name="kvalidity.bundled.Equals">Tiene que ser igual a %s</string>
+    <string name="kvalidity.bundled.NotEquals">No puede ser igual a %s</string>
+    <string name="kvalidity.bundled.In">Tiene que ser uno de eses: %s</string>
+    <string name="kvalidity.bundled.NotIn">No puede ser uno de eses: %s</string>
+    <string name="kvalidity.bundled.Valid">Tiene que ser vÃ¡lido</string>
+    <!--  Boolean constraints  -->
     <string name="kvalidity.bundled.True">Tiene que ser verdadero</string>
     <string name="kvalidity.bundled.False">Tiene que ser falso</string>
     <!--  Number constraints  -->
-    <string name="kvalidity.bundled.IntegerDigits">La cantidad de dÃ­gitos enteros tiene que estar entre {min} y {max}</string>
-    <string name="kvalidity.bundled.IntegerDigits.min">La cantidad de dÃ­gitos enteros tiene que ser mayor o igual que {min}</string>
-    <string name="kvalidity.bundled.IntegerDigits.max">La cantidad de dÃ­gitos enteros tiene que ser menor o igual que {max}</string>
-    <string name="kvalidity.bundled.DecimalDigits">La cantidad de dÃ­gitos decimales tiene que estar entre {min} y {max}</string>
-    <string name="kvalidity.bundled.DecimalDigits.min">La cantidad de dÃ­gitos decimales tiene que ser mayor o igual que {min}</string>
-    <string name="kvalidity.bundled.DecimalDigits.max">La cantidad de dÃ­gitos decimales tiene que ser menor o igual que {max}</string>
+    <string name="kvalidity.bundled.IntegerDigits">La cantidad de dÃ­gitos enteros tiene que estar entre %s y %s</string>
+    <string name="kvalidity.bundled.IntegerDigits.min">La cantidad de dÃ­gitos enteros tiene que ser mayor o igual que %s</string>
+    <string name="kvalidity.bundled.IntegerDigits.max">La cantidad de dÃ­gitos enteros tiene que ser menor o igual que %s</string>
+    <string name="kvalidity.bundled.DecimalDigits">La cantidad de dÃ­gitos decimales tiene que estar entre %s y %s</string>
+    <string name="kvalidity.bundled.DecimalDigits.min">La cantidad de dÃ­gitos decimales tiene que ser mayor o igual que %s</string>
+    <string name="kvalidity.bundled.DecimalDigits.max">La cantidad de dÃ­gitos decimales tiene que ser menor o igual que %s</string>
     <!--  Comparable constraints  -->
     <string name="kvalidity.bundled.Less">Tiene que ser menor que %s</string>
     <string name="kvalidity.bundled.LessOrEqual">Tiene que ser menor o igual que %s</string>
@@ -18,4 +25,37 @@
     <string name="kvalidity.bundled.GreaterOrEqual">Tiene que ser mayor o igual que %s</string>
     <string name="kvalidity.bundled.Between">Tiene que estar entre %s y %s</string>
     <string name="kvalidity.bundled.NotBetween">No puede estar entre %s y %s</string>
+    <!--  collection constraints  -->
+    <string name="kvalidity.bundled.Empty">Tiene que estar vacÃ­o</string>
+    <string name="kvalidity.bundled.NotEmpty">No puede estar vacÃ­o</string>
+    <string name="kvalidity.bundled.Size">El tamaÃ±o tiene que estar entre %s y %s</string>
+    <string name="kvalidity.bundled.Size.min">El tamaÃ±o tiene que ser mayor o igual que %s</string>
+    <string name="kvalidity.bundled.Size.max">El tamaÃ±o tiene que ser menor o igual que %s</string>
+    <string name="kvalidity.bundled.Contains">Tiene que contener %s</string>
+    <string name="kvalidity.bundled.ContainsAll">Tiene que contener %s</string>
+    <string name="kvalidity.bundled.ContainsAny">Tiene que contener %s</string>
+    <string name="kvalidity.bundled.NotContain">No puede contener %s</string>
+    <string name="kvalidity.bundled.NotContainAll">No puede contener %s</string>
+    <string name="kvalidity.bundled.NotContainAny">No puede contener %s</string>
+    <!--  text constraints  -->
+    <string name="kvalidity.bundled.Blank">Tiene que estar vacÃ­o</string>
+    <string name="kvalidity.bundled.NotBlank">No puede estar vacÃ­o</string>
+    <string name="kvalidity.bundled.Letter">Tiene que ser letra</string>
+    <string name="kvalidity.bundled.NotLetter">No puede ser letra</string>
+    <string name="kvalidity.bundled.Digit">Tiene que ser nÃºmero</string>
+    <string name="kvalidity.bundled.NotDigit">No puede ser nÃºmero</string>
+    <string name="kvalidity.bundled.LetterOrDigit">Tiene que ser letra o nÃºmero</string>
+    <string name="kvalidity.bundled.NotLetterOrDigit">No puede ser letra o nÃºmero</string>
+    <string name="kvalidity.bundled.UpperCase">Tiene que ser mayÃºsculo</string>
+    <string name="kvalidity.bundled.LowerCase">No puede ser minÃºsculo</string>
+    <string name="kvalidity.bundled.Matches">Tiene que corresponder a la expresiÃ³n regular %s</string>
+    <string name="kvalidity.bundled.NotMatch">No puede corresponder la expresiÃ³n regular %s</string>
+    <string name="kvalidity.bundled.ContainsRegex">Tiene que contener la expresiÃ³n regular %s</string>
+    <string name="kvalidity.bundled.NotContainRegex">No puede contener la expresiÃ³n regular %s</string>
+    <string name="kvalidity.bundled.StartsWith">Tiene que comenzar con %s</string>
+    <string name="kvalidity.bundled.NotStartWith">No puede comenzar con %s</string>
+    <string name="kvalidity.bundled.EndsWith">Tiene que terminar con %s</string>
+    <string name="kvalidity.bundled.NotEndWith">No puede terminar con %s</string>
+    <string name="kvalidity.bundled.Email">Tiene que ser una direcciÃ³n de e-mail vÃ¡lida</string>
+    <string name="kvalidity.bundled.Website">Tiene que ser un sitio web vÃ¡lido</string>
 </resources>

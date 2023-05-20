@@ -12,16 +12,14 @@
  *  limitations under the License.
  */
 
-package com.prvz.kvalidity.functions
+package com.prvz.kvalidity.ext
 
-import com.prvz.kvalidity.ObjectValidation
-import com.prvz.kvalidity.constraint.False
-import com.prvz.kvalidity.constraint.True
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.prvz.kvalidity.Validated
+import com.prvz.kvalidity.constraint.model.ConstraintViolationException
 
-/** Validates if the [Boolean] property is true */
-public fun <V : Boolean?> ObjectValidation<V>.isTrue(): ObjectValidation<V> =
-    this.validate({ True }) { it == null || it }
+public typealias ResultMonad<V, E> = com.github.michaelbull.result.Result<V, E>
 
-/** Validates if the [Boolean] property is false */
-public fun <V : Boolean?> ObjectValidation<V>.isFalse(): ObjectValidation<V> =
-    this.validate({ False }) { it == null || !it }
+public fun <T> Validated<T>.toResultMonad(): ResultMonad<T, ConstraintViolationException> =
+    if (isValid()) Ok(value) else Err(violation!!)
