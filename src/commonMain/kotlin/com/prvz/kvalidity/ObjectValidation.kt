@@ -40,8 +40,8 @@ public sealed class ObjectValidation<V>(
         constraintBuilder: (V) -> Constraint,
         isValid: (V) -> Boolean
     ): ObjectValidation<V> =
-        if (!isStopped && !isValid(value!!)) {
-            addNewViolation(value!!, constraintBuilder.invoke(value!!))
+        if (!isStopped && !isValid(value)) {
+            addNewViolation(value, constraintBuilder.invoke(value!!))
             this
         } else {
             this
@@ -51,8 +51,8 @@ public sealed class ObjectValidation<V>(
         constraintBuilder: (V) -> Constraint,
         isValid: suspend (V) -> Boolean
     ): ObjectValidation<V> =
-        if (!isStopped && !isValid(value!!)) {
-            addNewViolation(value!!, constraintBuilder.invoke(value!!))
+        if (!isStopped && !isValid(value)) {
+            addNewViolation(value, constraintBuilder.invoke(value!!))
             this
         } else {
             this
