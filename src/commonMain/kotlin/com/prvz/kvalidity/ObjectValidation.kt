@@ -86,7 +86,9 @@ public sealed class ObjectValidation<V>(
         isValid: suspend (V) -> Boolean,
         mapperFunc: suspend (V) -> R
     ): MappedObjectValidation<R> =
-        if (isValid(value)) {
+        if (isStopped) {
+            MappedObjectValidation.Invalid(validator, propName)
+        } else if (isValid(value)) {
             val mappedValue = mapperFunc.invoke(value)
             MappedObjectValidation.Valid(validator, mappedValue, propName)
         } else {
